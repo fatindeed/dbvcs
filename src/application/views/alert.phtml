@@ -1,0 +1,5 @@
+<?php $error_stack = ErrorStack::getInstance(); foreach ($error_stack as $error) { ?>
+<div class="alert alert-<?=$error['class'];?>" role="alert">
+  <?=$error['body'];?>
+</div>
+<?php } ?>

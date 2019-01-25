@@ -1,0 +1,71 @@
+<?=$this->render('header.phtml');?>
+<div class="container-fluid">
+  <div class="row mt-3">
+    <div class="col-auto mr-auto">
+      <h3>版本历史</h3>
+    </div>
+  </div>
+  <hr />
+  <?=$this->render('alert.phtml');?>
+  <form id="commitForm" action="/dbvcs/version/<?=$commit->version;?>" method="POST">
+    <div class="form-group row">
+      <div class="col-sm-2">版本：</div>
+      <div class="col-sm-10"><?=$commit->version;?></div>
+    </div>
+    <div class="form-group row">
+      <label for="author" class="col-sm-2 col-form-label">提交人：</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control-plaintext" id="author" name="author" value="<?=$commit->author;?>" readonly required />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="message" class="col-sm-2 col-form-label">备注：</label>
+      <div class="col-sm-10">
+        <textarea class="form-control-plaintext" id="message" name="message" readonly required><?=$commit->message;?></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <label for="content" class="col-sm-2 col-form-label">SQL：</label>
+      <div class="col-sm-10">
+        <textarea class="form-control-plaintext" id="content" name="content" rows="10" readonly required><?=$content;?></textarea>
+      </div>
+    </div>
+    <div id="buttonRow" class="row justify-content-end mt-3 sr-only">
+      <div class="col-sm-10">
+        <?php if ($commit->synced) { ?>
+        <span class="d-inline-block" data-toggle="popover" data-placement="top" data-content="已提交到GitLab的文件无法编辑">
+          <button type="button" class="btn btn-primary" style="pointer-events: none;" data-role="view" disabled>编 辑</button>
+        </span>
+        <button type="button" class="btn btn-secondary" id="backBtn" data-role="view">返 回</button>
+        <?php } else { ?>
+        <button type="button" class="btn btn-primary" id="editBtn" data-role="view">编 辑</button>
+        <button type="button" class="btn btn-secondary" id="backBtn" data-role="view">返 回</button>
+        <button type="submit" class="btn btn-primary" id="submitBtn" data-role="edit">保 存</button>
+        <button type="button" class="btn btn-secondary" id="cancelBtn" data-role="edit">放 弃</button>
+        <?php } ?>
+      </div>
+    </div>
+  </form>
+</div>
+<script type="text/javascript" language="JavaScript">
+$(function () {
+    $('[data-role="edit"]').hide();
+    $('#buttonRow').removeClass('sr-only');
+    $('[data-toggle="popover"]').popover();
+    $('#backBtn').click(function() {
+        window.history.back();
+    });
+    $('#editBtn').click(function() {
+        $('[data-role="view"]').hide();
+        $('.form-control-plaintext').prop('readonly', false).removeClass('form-control-plaintext').addClass('form-control');
+        $('[data-role="edit"]').show();
+    });
+    $('#cancelBtn').click(function() {
+        $('[data-role="edit"]').hide();
+        $('#commitForm')[0].reset();
+        $('.form-control').prop('readonly', true).removeClass('form-control').addClass('form-control-plaintext');
+        $('[data-role="view"]').show();
+    });
+});
+</script>
+<?=$this->render('footer.phtml');?>

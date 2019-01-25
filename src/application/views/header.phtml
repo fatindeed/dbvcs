@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Database Version Control System</title>
+<?php
+// UI\Html::importCss('https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap.min.css');
+// UI\Html::importCss('https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css');
+// UI\Html::importScript('https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js');
+// UI\Html::importScript('https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.min.js');
+// UI\Html::importScript('https://cdn.bootcss.com/popper.js/1.14.6/umd/popper.min.js');
+// UI\Html::importScript('https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js');
+?>
+<link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+<!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+<script src="https://cdn.bootcss.com/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="javascript:void(0);">DB VCS</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <?php $items = Yaf\Registry::get('config')->nav; foreach ($items as $item) { ?>
+      <li class="nav-item<?=(CRM_BRAND == strtolower($item->name) ? ' active' : '');?>">
+      <a class="nav-link" href="<?=$item->link;?>"><?=$item->name;?></a>
+      </li>
+      <?php } ?>
+    </ul>
+  </div>
+</nav>
